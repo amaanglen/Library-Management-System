@@ -1,56 +1,85 @@
-# 🏨 Hotel Management System – OOP Based Java Project
+# 📚 Library Management System (Java – OOAD Based)
 
-A console-based **Hotel Management System** implemented using core **Object-Oriented Programming (OOP)** concepts in Java. This system is designed to handle various hotel operations such as:
+A **console-based Library Management System** developed using principles of **Object-Oriented Analysis and Design (OOAD)**. The system models real-world interactions among library roles and supports tasks like book issuance, returns, user management, and catalog operations.
 
-- Storing and retrieving customer information
-- Room booking & unbooking (across 4 different room types)
-- Food ordering linked to specific rooms
-- Viewing room features and availability
-- Generating detailed bills for each customer
-
-The program is **menu-driven** and runs in a loop until explicitly exited by the user.
+The codebase strictly follows object-oriented principles — responsibilities are **modularized**, **entities are decoupled**, and **logic is separated from UI** for better maintainability. This project was created as part of the academic course **CS309: Object Oriented Analysis and Design**.
 
 ---
 
-## ✨ Key Features
+## 🧩 Key Features
 
-- **Room Operations:** Book, unbook, and check availability of rooms with type-specific features.
-- **Customer & Food Services:** Add customer details and allow food ordering by room.
-- **Billing System:** Calculate and display bills with room and food charges.
-- **Persistent Storage:** 
-  - Uses **file handling** to store hotel state (customer data, bookings, orders) before exiting.
-  - On restart, the program reads from the file to restore previous state.
-- **Multithreading:** File write operations are performed in a **separate thread** to ensure efficiency.
-- **Custom Exception Handling:** Throws a **user-defined exception** if a user tries to book an already-occupied room.
-- **Robust Error Handling:** Comprehensive use of `try-catch` blocks to handle unexpected exceptions safely.
+- Clean separation of concerns between business logic and interface.
+- Fully console-driven UI using object-oriented Java.
+- Role-based access: Borrower, Clerk, Librarian, Administrator.
+- Implements classic OOAD design patterns.
+- Database integration using JavaDB (Derby).
+- Complete UML Class Diagram and schema provided.
 
 ---
 
-## 🛠️ OOP Concepts Used
+## 📊 Class Diagram
 
-- **Classes & Objects**
-- **Inheritance**
-- **Interfaces**
-- **ArrayLists for dynamic data storage**
-- **File I/O Streams**
-- **Multithreading**
-- **User-defined Exceptions**
+Designed with [StarUML](http://staruml.io/) to represent the relationships and behavior of the system components.
 
----
+> 🔹 After refactoring, a new class `HoldRequestOperations` was added between `Book` and `HoldRequest` to remove bidirectional dependency.  
+> More details: [GitHub Issue #9](https://github.com/OSSpk/Library-Management-System-JAVA/issues/9)
 
-## 🔧 Technologies Used
-
-- Java (JDK 8 or higher)
-- Console I/O
-- Java Threading API
-- File Handling (Serialization)
-- Exception Handling
+![Class Diagram](../master/images/diagram.PNG)
 
 ---
 
-## 🚀 How to Run
+## 🧪 System Actors & Use Cases
 
-1. **Compile and run** the `Main` class using your preferred IDE or terminal.
-2. The program runs in a loop and provides a text-based menu interface.
-3. On exit, the system automatically saves the current hotel status to a file.
-4. Restarting the program loads previous session data for continuity.
+| Actor | Functional Responsibilities |
+|-------|-----------------------------|
+| **Borrower** | Search books by title, author, or subject. Place hold requests. View current checkouts. |
+| **Checkout Clerk** | All borrower actions, plus checkout/return books, manage renewals, record fines, update user info. |
+| **Librarian** | Full book catalog management — add/delete/update items. |
+| **Administrator** | Add/remove librarians and clerks, monitor issued book history, view full catalog. |
+
+🖥️ **User Interface Preview:**
+
+<p align="center">
+   <img src="../master/images/interface.PNG" width="400"/>
+   <img src="../master/images/interface2.PNG" width="400"/>
+</p>   
+
+---
+
+## ⚙️ How to Run
+
+### 🛠️ Prerequisites:
+- [Java SE Development Kit 8 (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [NetBeans IDE](https://netbeans.org/downloads/)
+
+### 📦 Steps:
+
+1. **Open Project in NetBeans**
+   - `File > Open Project` → Choose the `Project` folder from this repo.
+
+2. **Configure JavaDB Database**
+   - In the **Services** tab of NetBeans:
+     - Right-click on **JavaDB > Properties**
+     - Set database path to the included `Database` folder.
+
+3. **Create Database Connection**
+   - Right-click on `Databases > New Connection`
+   - Use `Java DB Network`
+   - Credentials:
+     ```
+     Host: localhost
+     Port: 1527
+     Database: LMS
+     User: haris
+     Password: 123
+     ```
+
+4. **Connect and Run**
+   - Right-click the DB connection and select **Connect**
+   - Run the project using the NetBeans run button.
+
+![Step3](../master/images/final.png)
+
+> 🔐 **Admin Password:** `lib`  
+Used to access privileged functions like adding librarians or clerks.
+
